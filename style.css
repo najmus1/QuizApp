@@ -72,6 +72,18 @@ body {
     display: none;
 }
 
+#timer {
+    background: #001e4d;
+    color: #fff;
+    position: fixed;
+    font-weight: 500;
+    width: 100px;
+    border: 0;
+    padding: 5px;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
 .correct {
     background: #9aeabc;
 }

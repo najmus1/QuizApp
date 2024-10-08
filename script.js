@@ -8,6 +8,7 @@ const questions = [
             { text: "Hyper Tell Markup Language", correct: false },
         ],
     },
+    //
     {
         question: " Which is larget animal in the world?",
         answers: [
@@ -80,9 +81,12 @@ const questions = [
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+const timerElement = document.getElementById("timer"); // Add a timer element
 
 let currentQuestionIndex = 0;
 let score = 0;
+let timerInterval; // Store the interval
+let timeLeft = 10; // Set the countdown to 10 seconds
 
 function startQuiz() {
     currentQuestionIndex = 0;
@@ -107,6 +111,11 @@ function showQuestion() {
         }
         button.addEventListener("click", selectAnswer);
     });
+
+    // Start the countdown
+    timeLeft = 10;
+    timerElement.innerHTML = `Time left: ${timeLeft}s`;
+    startTimer();
 }
 
 function resetState() {
@@ -114,6 +123,7 @@ function resetState() {
     while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild);
     }
+    clearInterval(timerInterval); // Clear the previous interval
 }
 
 function selectAnswer(e) {
@@ -132,6 +142,7 @@ function selectAnswer(e) {
         button.disabled = true;
     });
     nextButton.style.display = "block";
+    clearInterval(timerInterval); // Stop the timer once an answer is selected
 }
 
 function shoeScore() {
@@ -148,6 +159,24 @@ function handleNextButton() {
     } else {
         shoeScore();
     }
+}
+
+// Timer function
+function startTimer() {
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerElement.innerHTML = `Time left: ${timeLeft}s`;
+        if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            nextButton.style.display = "block";
+            Array.from(answerButtons.children).forEach((button) => {
+                if (button.dataset.correct === "true") {
+                    button.classList.add("correct");
+                }
+                button.disabled = true;
+            });
+        }
+    }, 1000);
 }
 
 nextButton.addEventListener("click", () => {
