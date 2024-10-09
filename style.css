@@ -16,6 +16,21 @@ body {
     margin: 100px auto 0;
     border-radius: 10px;
     padding: 30px;
+    position: relative; /* This ensures the timer is positioned relative to this container */
+}
+
+#timer {
+    background: #001e4d;
+    color: #fff;
+    font-weight: 500;
+    width: 100px;
+    border: 0;
+    padding: 5px;
+    border-radius: 4px;
+    position: absolute; /* Position relative to the app container */
+    top: 40px; /* Distance from the top to move it below the heading */
+    right: 20px; /* Move the timer slightly to the left by adjusting right */
+    text-align: center;
 }
 
 .app h1 {
@@ -70,18 +85,6 @@ body {
     border-radius: 4px;
     cursor: pointer;
     display: none;
-}
-
-#timer {
-    background: #001e4d;
-    color: #fff;
-    position: fixed;
-    font-weight: 500;
-    width: 100px;
-    border: 0;
-    padding: 5px;
-    border-radius: 4px;
-    z-index: 1000;
 }
 
 .correct {

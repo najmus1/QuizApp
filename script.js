@@ -8,13 +8,12 @@ const questions = [
             { text: "Hyper Tell Markup Language", correct: false },
         ],
     },
-    //
     {
-        question: " Which is larget animal in the world?",
+        question: "Which is the largest animal in the world?",
         answers: [
             { text: "Elephant", correct: false },
-            { text: "Shark", correct: true },
-            { text: "Blue Whale", correct: false },
+            { text: "Shark", correct: false },
+            { text: "Blue Whale", correct: true },
             { text: "Giraffe", correct: false },
         ],
     },
@@ -81,12 +80,12 @@ const questions = [
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
-const timerElement = document.getElementById("timer"); // Add a timer element
+const timerElement = document.getElementById("timer");
 
 let currentQuestionIndex = 0;
 let score = 0;
-let timerInterval; // Store the interval
-let timeLeft = 10; // Set the countdown to 10 seconds
+let timerInterval;
+let timeLeft = 10;
 
 function startQuiz() {
     currentQuestionIndex = 0;
@@ -112,18 +111,17 @@ function showQuestion() {
         button.addEventListener("click", selectAnswer);
     });
 
-    // Start the countdown
     timeLeft = 10;
     timerElement.innerHTML = `Time left: ${timeLeft}s`;
+    nextButton.style.display = "block"; // Always show the next button
     startTimer();
 }
 
 function resetState() {
-    nextButton.style.display = "none";
     while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild);
     }
-    clearInterval(timerInterval); // Clear the previous interval
+    clearInterval(timerInterval); // Stop any previous timer
 }
 
 function selectAnswer(e) {
@@ -141,11 +139,11 @@ function selectAnswer(e) {
         }
         button.disabled = true;
     });
-    nextButton.style.display = "block";
-    clearInterval(timerInterval); // Stop the timer once an answer is selected
+    nextButton.disabled = false; // Enable the next button after selection
+    clearInterval(timerInterval); // Stop the timer after an answer is selected
 }
 
-function shoeScore() {
+function showScore() {
     resetState();
     questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
     nextButton.innerHTML = "Play Again";
@@ -157,24 +155,24 @@ function handleNextButton() {
     if (currentQuestionIndex < questions.length) {
         showQuestion();
     } else {
-        shoeScore();
+        showScore();
     }
 }
 
-// Timer function
 function startTimer() {
+    nextButton.disabled = true; // Disable the next button while the timer is running
     timerInterval = setInterval(() => {
         timeLeft--;
         timerElement.innerHTML = `Time left: ${timeLeft}s`;
         if (timeLeft === 0) {
             clearInterval(timerInterval);
-            nextButton.style.display = "block";
             Array.from(answerButtons.children).forEach((button) => {
                 if (button.dataset.correct === "true") {
                     button.classList.add("correct");
                 }
                 button.disabled = true;
             });
+            nextButton.disabled = false; // Enable the next button when time runs out
         }
     }, 1000);
 }
