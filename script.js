@@ -18,7 +18,7 @@ const questions = [
         ],
     },
     {
-        question: " Which animal is known as the 'Ship of the Desert?",
+        question: "Which animal is known as the 'Ship of the Desert?",
         answers: [
             { text: "Elephant", correct: false },
             { text: "Camel", correct: true },
@@ -27,16 +27,16 @@ const questions = [
         ],
     },
     {
-        question: " Which is the smallest country in the world",
+        question: "Which is the smallest country in the world?",
         answers: [
-            { text: "Votican City", correct: true },
+            { text: "Vatican City", correct: true },
             { text: "Bhutan", correct: false },
-            { text: "Napal", correct: false },
-            { text: "Shri lanka", correct: false },
+            { text: "Nepal", correct: false },
+            { text: "Sri Lanka", correct: false },
         ],
     },
     {
-        question: " How many seconds make one hour? ",
+        question: "How many seconds make one hour?",
         answers: [
             { text: "2800 seconds", correct: false },
             { text: "2400 seconds", correct: false },
@@ -46,7 +46,7 @@ const questions = [
     },
     {
         question:
-            "How many vowels are there in the English alphabet and name them? ",
+            "How many vowels are there in the English alphabet and name them?",
         answers: [
             { text: "5 vowels namely a, e, i, o, and u.", correct: true },
             { text: "5 vowels namely a, e, o, v, and y.", correct: false },
@@ -58,18 +58,18 @@ const questions = [
         ],
     },
     {
-        question: " What is the National Anthem of India? ",
+        question: "What is the National Anthem of India?",
         answers: [
             {
-                text: " The National Anthem of India is Sujalam suphalam malayaja sheetalam",
+                text: "The National Anthem of India is Sujalam suphalam malayaja sheetalam",
                 correct: false,
             },
             {
-                text: "The National Anthem of India is  Vande maataram.",
+                text: "The National Anthem of India is Vande Mataram.",
                 correct: false,
             },
             {
-                text: " The National Anthem of India is Jana Gana Mana.",
+                text: "The National Anthem of India is Jana Gana Mana.",
                 correct: true,
             },
             { text: "Sare Jahan Se Achha Hindustan Hamara", correct: false },
@@ -173,6 +173,9 @@ function startTimer() {
                 button.disabled = true;
             });
             nextButton.disabled = false; // Enable the next button when time runs out
+
+            // Automatically click the next button when time runs out
+            nextButton.click();
         }
     }, 1000);
 }
